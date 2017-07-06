@@ -1,0 +1,39 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+
+<dom-module id="rdf-source">
+  <template>
+  <style include="shared-styles">
+  :host {
+    display: block;
+  }
+  </style>
+  <div class="card">
+    <h2>Hello [[prop1]]!</h2>
+  </div>
+</template>
+
+<script>
+/**
+* `rdf-triplet`
+*
+*
+* @customElement
+* @polymer
+* @demo demo/index.html
+*/
+class RdfSource extends Polymer.Element {
+  static get is() { return 'rdf-source'; }
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'rdf-source'
+      }
+    };
+  }
+}
+
+window.customElements.define(RdfSource.is, RdfSource);
+</script>
+</dom-module>

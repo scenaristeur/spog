@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="rdf-endpoint">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `rdf-endpoint`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class RdfEndpoint extends Polymer.Element {
+      static get is() { return 'rdf-endpoint'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'rdf-endpoint'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(RdfEndpoint.is, RdfEndpoint);
+  </script>
+</dom-module>

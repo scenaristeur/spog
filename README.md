@@ -7,7 +7,7 @@
 
 ```
 
-nodejs, npm et le package bower
+nodejs v4.4.3^, npm v3.8.8^ et le package bower 1.8^
 
 ```
 
@@ -25,7 +25,7 @@ node .
 ou en une ligne de commande :
 
 ```
-git clone https://github.com/scenaristeur/spog.git && cd 0smag && npm install && cd public && bower install && cd .. && node .
+git clone https://github.com/scenaristeur/spog.git && cd spog && npm install && cd public && bower install && cd .. && node .
 
 ```
 

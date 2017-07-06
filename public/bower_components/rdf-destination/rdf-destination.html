@@ -1,0 +1,72 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+
+
+<dom-module id="rdf-destination">
+  <template>
+  <style include="shared-styles">
+  :host {
+    display: block;
+  }
+  </style>
+  <div class="card">
+    <h2>[[prop1]], là où vous souhaitez envoyer les triplets créés.</h2>
+
+    <paper-toggle-button id="destinationTypeToggle" checked="{{destinationSparql}}" on-change="destinationTypeChanged">[[destinationString]]</paper-toggle-button>
+    <div hidden$="{{destinationSparql}}">Configuration Fichier</div>
+    <div hidden$="{{!destinationSparql}}">Configuration SPARQL</div>
+  </div>
+</template>
+
+<script>
+/**
+* `rdf-destination`
+*
+*
+* @customElement
+* @polymer
+* @demo demo/index.html
+*/
+class RdfDestination extends Polymer.Element {
+  static get is() { return 'rdf-destination'; }
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'rdf-destination'
+      },
+      destinationSparql: {
+        type: Boolean,
+        value: false,
+
+      },
+      destinationString: {
+        type: String,
+        value: "Fichier"
+      }
+    }
+  }
+
+  destinationTypeChanged(e){
+    if (this.destinationSparql){
+      this.destinationString = "endpoint Sparql";
+    }else{
+      this.destinationString  = "Fichier";
+    }
+  }
+
+  computeDestinationString(dest){
+    console.log(dest);
+    if (dest){
+      this.destinationString = "Sparql";
+    }else{
+      this.destinationString  = "Fichier";
+    }
+  }
+
+}
+
+window.customElements.define(RdfDestination.is, RdfDestination);
+</script>
+</dom-module>

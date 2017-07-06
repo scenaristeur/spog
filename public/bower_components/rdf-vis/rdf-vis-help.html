@@ -1,0 +1,43 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+
+
+<dom-module id="rdf-vis-help">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        padding-right: 8px;
+      }
+    </style>
+    <div class="card">
+      <h2>[[titre]], pour visualiser un graphe.</h2>
+      <p>Basé sur Vis-JS</p>
+      <p>Permet via le bouton "Edit" de gérer les noeuds/nodes et les liens/edges entre eux.</p>
+    </div>
+  </template>
+
+  <script>
+    /**
+  * `rdf-vis`
+  *
+  *
+  * @customElement
+  * @polymer
+  * @demo demo/index.html
+  */
+    class RdfVisHelp extends (Polymer.Element) {
+      static get is() { return 'rdf-vis-help'; }
+      static get properties() {
+        return {
+          titre: {
+            type: String,
+            value: 'rdf-vis'
+          },
+        }
+      }
+    }
+
+    window.customElements.define(RdfVisHelp.is, RdfVisHelp);
+  </script>
+</dom-module>

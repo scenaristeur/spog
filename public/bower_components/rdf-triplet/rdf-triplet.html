@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="rdf-triplet">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `rdf-triplet`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class RdfTriplet extends Polymer.Element {
+      static get is() { return 'rdf-triplet'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'rdf-triplet'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(RdfTriplet.is, RdfTriplet);
+  </script>
+</dom-module>

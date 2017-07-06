@@ -1,0 +1,159 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<link rel="import" href="../smag-rdf/message-mixin.html">
+
+<dom-module id="rdf-form">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        padding-right: 8px;
+      }
+    </style>
+      <h3>[[prop1]] <paper-button ontap="_pageAide">?</paper-button><paper-button dialog-dismiss raised>X</paper-button></h3>
+      <paper-input id="sujetInput" label="Sujet" value="{{sujet::change}}" autofocus></paper-input>
+      <paper-input id="proprieteInput" label="propriete" value="{{propriete::change}}"></paper-input>
+      <paper-input id="objetInput" label="Objet" value="{{objet::change}}" on-keydown="checkForEnter"></paper-input>
+      <paper-input id="ponctuationInput" label="Syntaxe Turtle" value="{{ponctuation::change}}" on-keydown="checkForEnter"></paper-input>
+
+  </template>
+
+  <script>
+    /**
+  * `rdf-form`
+  *
+  *
+  * @customElement
+  * @polymer
+  * @demo demo/index.html
+  */
+    class RdfForm extends MessageMixin(Polymer.Element) {
+      static get is() { return 'rdf-form'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'rdf-form'
+          },
+          sujet: {
+            type: String,
+            value: null
+          },
+          propriete: {
+            type: String,
+            value: null
+          },
+          objet: {
+            type: String,
+            value: null
+          },
+          ponctuation: {
+            //https://fr.wikipedia.org/wiki/Turtle_(syntaxe)
+            type: String,
+            value: ","
+          },
+          selectedNode: {
+            type: Object,
+            statePath: 'selectedNode',
+            observer: '_selectedNodeChanged'
+          },
+          selectedEdge: {
+            type: Object,
+            statePath: 'selectedEdge',
+            observer: '_selectedEdgeChanged'
+          },
+        }
+      }
+
+      validForm() {
+        var action = "add";
+        if ((this.$.sujetInput.value == null) || (this.$.sujetInput.value.length < 1)) {
+          //blank_node
+          this.$.sujetInput.value = "_:blank" + Date.now();
+        } else if ((this.$.proprieteInput.value == null) || (this.$.objetInput.value == null) || (this.$.proprieteInput.value.length < 1) || (this.$.objetInput.value.length < 1)) {
+          action = "search";
+        }
+        //creation du triplet avec les label
+        var sujetInput = this.$.sujetInput.value.trim();
+        var sujetLabel = sujetInput[0].toUpperCase() + sujetInput.substring(1);
+        var proprieteInput = this.$.proprieteInput.value.trim();
+        var proprieteLabel = proprieteInput[0].toLowerCase() + proprieteInput.substring(1);
+        var objetInput = this.$.objetInput.value.trim();
+        var objetLabel = objetInput[0].toUpperCase() + objetInput.substring(1);
+        var triplet = { sujet: { label: sujetLabel }, propriete: { label: proprieteLabel }, objet: { label: objetLabel } };
+        // REinit du formulaire
+        switch (this.$.ponctuationInput.value) {
+          case "?":
+            action = "search"
+            break;
+          case ",":
+            this.$.objetInput.value = null;
+            this.$.objetInput.focus();
+            break;
+          case ";":
+            this.$.proprieteInput.value = null;
+            this.$.objetInput.value = null;
+            this.$.proprieteInput.focus();
+            break;
+          case ".":
+            this.$.sujetInput.value = null;
+            this.$.proprieteInput.value = null;
+            this.$.objetInput.value = null;
+            this.$.sujetInput.focus();
+            break;
+          case "!":
+            this.$.sujetInput.value = objetLabel;
+            //this.$.proprieteInput.value=null;
+            this.$.objetInput.value = sujetLabel;
+            this.$.proprieteInput.focus();
+            break;
+          default:
+            this.$.sujetInput.value = null;
+            this.$.proprieteInput.value = null;
+            this.$.objetInput.value = null;
+            this.$.ponctuationInput.value = ".";
+            this.$.sujetInput.focus();
+        }
+        console.log(action);
+        // console.log(this.triplet);
+        if (action == "add") {
+          //  this.dispatch('addTriplet', this.triplet);
+
+          this.dispatch('addTriplet', triplet);
+        } else {
+          console.log(action + " Non prise en compte actuellement");
+        }
+      }
+      attached() {
+        this.$.sujetInput.focus();
+      }
+      checkForEnter(e) {
+        // check if 'enter' was pressed
+        console.log(e);
+        if (e.keyCode === 13) {
+          this.validForm();
+        }
+      }
+      _selectedNodeChanged() {
+        this.$.sujetInput.value = this.selectedNode.title || this.selectedNode.label;
+        console.log(this.$.sujetInput.value);
+       // A METTRE EN OPTION SI ON VEUT ARRIVER DANS LE FORMULAIRE LORS DE LA SELECTION DANS rdf-VIS this.$.objetInput.focus();
+      }
+      _selectedEdgeChanged() {
+        this.$.proprieteInput.value = this.selectedNode.title || this.selectedEdge.label;
+        console.log(this.$.proprieteInput.value);
+         // A METTRE EN OPTION SI ON VEUT ARRIVER DANS LE FORMULAIRE LORS DE LA SELECTION DANS rdf-VIS//  this.$.objetInput.focus();
+      }
+
+      _pageAide(){
+        this.route = "help";
+      }
+
+    }
+
+    window.customElements.define(RdfForm.is, RdfForm);
+  </script>
+</dom-module>

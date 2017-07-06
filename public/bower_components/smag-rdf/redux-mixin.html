@@ -1,0 +1,154 @@
+<link rel="import" href="../polymer-redux/polymer-redux.html">
+<script src="lib/redux.js"></script>
+
+<script>
+const initial = {
+	message: 'Hello from PolymerRedux',
+	lang: "fr",
+	endpointsConnus: [ // prevoir d'embarquer un serveur autonome ? http://jena.apache.org/documentation/fuseki2/fuseki-embedded.html
+	{ name: "local", url: "http://127.0.0.1:3030", type: "fuseki", description: "Un serveur local installé sur votre machine. Pour installer un serveur Fuseki sur votre machine, consultez la page http://smag0.blogspot.fr/p/blog-page_14.html au point n°4.", defaultDataset: "test", urlDetail: "/$/server", score: 0 },
+	{ name: "rdf-smag0", url: "https://rdf-smag0.rhcloud.com", type: "fuseki", description: "La deuxième version du servuer commun pour le projet Smag0 (http://smag0.blogspot.fr/)", defaultDataset: "ds", score: 0 },
+	{ name: "fuseki-smag0", url: "https://fuseki-smag0.rhcloud.com", type: "fuseki", description: "La première version du servuer commun pour le projet Smag0 (http://smag0.blogspot.fr/)", defaultDataset: "ds", score: 0 }
+],
+url: "http://127.0.0.1:3030",
+ds: "test",
+graphe: "<http://smag0.blogspot.fr/SparqlUpdate>",
+nodes: {},
+edges: {},
+nodes2add: {},
+edges2add: {},
+triplets2add: [],
+selectedNode: {},
+selectedEdge: {}
+};
+
+// DEBUT a virer dans une autre page avec une action
+if ((window.location.hostname != "127.0.0.1") && (window.location.hostname != "localhost")) {
+	initial.url = "https://rdf-smag0.rhcloud.com";
+	initial.ds = "ds";
+	initial.graphe = "<http://smag0.blogspot.fr/SparqlUpdate>";
+}
+// FIN A VIRER DANS UNE AUTRE PAGE
+
+
+
+const reducer = (state = initial, action) => {
+	switch (action.type) {
+		case 'UPDATE_NODES':
+		//	console.log(action.nodes);
+		return Object.assign({}, state, {
+			nodes: action.nodes
+		});
+
+		break;
+		case 'UPDATE_EDGES':
+		//console.log(action.edges);
+		return Object.assign({}, state, {
+			edges: action.edges
+		});
+		break;
+
+
+
+
+		case 'UPDATE_MESSAGE':
+		return Object.assign({}, state, {
+			message: action.message
+		});
+		break;
+		case 'ADD_TRIPLET':
+		console.log(action.triplet);
+		const triplets2add = state.triplets2add.slice(0);
+		triplets2add.push(action.triplet);
+		return Object.assign({}, state, { triplets2add: triplets2add });
+		break;
+		case 'ADD_TRIPLETS':
+		console.log(action.triplets);
+		const triplets2addmulti = state.triplets2add.slice(0);
+		for (var i = 0; i < action.triplets.length; i++) {
+			var tripletTemp = action.triplets[i];
+
+			var triplet = { sujet: { label: tripletTemp.sujet }, propriete: { label: tripletTemp.propriete }, objet: { label: tripletTemp.objet } };
+			// console.log(triplet);
+			triplets2addmulti.push(triplet);
+		}
+		return Object.assign({}, state, { triplets2add: triplets2addmulti });
+		break;
+		case 'CLEAN_TRIPLETS2ADD':
+		console.log("clean");
+		return Object.assign({}, state, { triplets2add: [] });
+		break;
+		case 'SELECTED_NODE':
+		console.log(action.selected);
+		return Object.assign({}, state, { selectedNode: action.selected });
+		break;
+		case 'SELECTED_EDGE':
+		console.log(action.selected);
+		return Object.assign({}, state, { selectedEdge: action.selected });
+		break;
+
+		case 'ADD_NODES_EDGES_JSON':
+		console.log(action.nodes_edges);
+		return Object.assign({}, state, {
+			nodes2add: action.nodes_edges.nodes,
+			edges2add: action.nodes_edges.edges,
+		});
+
+		break;
+		case 'ADD_EDGE':
+		console.log(action.edge);
+		const soloNodesToClean = state.soloNodes.slice(0);
+		console.log(soloNodesToClean);
+		var from = action.edge.from;
+		var to = action.edge.to;
+		var label = action.edge.label;
+		var arrows = action.edge.arrows;
+		//supprimer from et to de solonodes, creer le triplet et le rajouter
+		var tripletsToUpdate = state.triplets.slice(0);
+		//	console.log(tripletsToUpdate);
+
+		var fromNode = soloNodesToClean.remById(from);
+		var toNode = soloNodesToClean.remById(to);
+		console.log(fromNode);
+		console.log(toNode);
+		var triplet = {}
+		if (arrows == "to") {
+			triplet.sujet = fromNode;
+			triplet.propriete = { label: label };
+			triplet.objet = toNode;
+		} else {
+			console.log("pas encore traite");
+		}
+		tripletsToUpdate.push(triplet);
+
+		console.log(tripletsToUpdate);
+		return Object.assign({}, state, { soloNodes: soloNodesToClean, triplets: tripletsToUpdate });
+		break;
+		default:
+		if (action.type != '@@redux/INIT'){
+			console.log("l'action " + action.type + " n'est pas prise en compte dans smag-rdf/redux-mixin.html");
+			console.log(action);
+			return state;
+		}
+	}
+};
+const store = Redux.createStore(reducer);
+ReduxMixin = PolymerRedux(store);
+
+Array.prototype.remById = function (val) {
+	console.log(val);
+	for (var i = 0; i < this.length; i++) {
+		console.log(this[i].id);
+		if (this[i].id === val) {
+			console.log(true);
+			this.splice(i, 1);
+			return this[i];
+			i--;
+		} else {
+			console.log(false);
+		}
+	}
+	// return this;
+}
+
+</script>

@@ -1,0 +1,105 @@
+<link rel="import" href="redux-mixin.html">
+<script>
+	MessageMixin = Parent => class MessageMixin extends ReduxMixin(Parent) {
+		static get properties() {
+			return {
+				message: {
+					type: String,
+					statePath: 'message'
+				},
+				url: {
+					type: String,
+					statePath: 'url'
+				},
+				ds: {
+					type: String,
+					statePath: 'ds'
+				},
+				graphe: {
+					type: String,
+					statePath: 'graphe'
+				},
+				endpointsConnus: {
+					type: Array,
+					statePath: 'endpointsConnus'
+				},
+				/*triplets: {
+					type: Array,
+					statePath: 'triplets'
+				},*/
+				/*soloNodes: {
+					type: Array,
+					statePath: 'soloNodes'
+				}*/
+			};
+		}
+
+		static get actions() {
+			return {
+				updateNodes(nodes) {
+					//	console.log(nodes);
+					return {
+						type: 'UPDATE_NODES',
+						nodes: nodes
+					}
+				},
+				updateEdges(edges) {
+					return {
+						type: 'UPDATE_EDGES',
+						edges: edges
+					}
+				},
+				cleanTriplets2add() {
+					return {
+						type: 'CLEAN_TRIPLETS2ADD'
+					}
+				},
+				selectedNode(selected) {
+					return {
+						type: 'SELECTED_NODE',
+						selected: selected
+
+					}
+				},
+				selectedEdge(selected) {
+					return {
+						type: 'SELECTED_EDGE',
+						selected: selected
+					}
+				},
+				updateMessage(message) {
+					return {
+						type: 'UPDATE_MESSAGE',
+						message
+					}
+				},
+				addTriplet(triplet) {
+					return {
+						type: 'ADD_TRIPLET',
+						triplet: triplet
+					}
+				},
+				addTriplets(triplets) {
+					return {
+						type: 'ADD_TRIPLETS',
+						triplets: triplets
+					}
+				},
+				addNodesEdgesJSON(nodes_edges) {
+					return {
+						type: 'ADD_NODES_EDGES_JSON',
+						nodes_edges: nodes_edges
+					}
+				},
+
+				addEdge(edge) {
+					return {
+						type: 'ADD_EDGE',
+						edge: edge
+					}
+				}
+			};
+		}
+	};
+
+</script>

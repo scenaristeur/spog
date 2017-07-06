@@ -1,0 +1,126 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<dom-module id="rdf-form">
+  <template>
+  <style include="shared-styles">
+  :host {
+    display: block;
+  }
+  </style>
+  <div class="card">
+    <h2>[[prop1]], pour ajouter ou rechercher un triplet.</h2>
+    <p>Syntaxe Turtle : https://fr.wikipedia.org/wiki/Turtle_(syntaxe)</p>
+    <p>Syntaxe Turtle Etendue : un point pour un triplet complet, virgule pour garder le sujet, point-virgule pour garder sujet et propriete + ! pour inverser sujet et objet, ? pour rechercher...</p>
+    <paper-input id="sujetInput" label="Sujet" value="{{sujet::change}}"></paper-input>
+    <paper-input id="proprieteInput" label="propriete" value="{{propriete::change}}"></paper-input>
+    <paper-input id="objetInput" label="Objet" value="{{objet::change}}" on-keydown="checkForEnter"></paper-input>
+    <paper-input id="ponctuationInput" label="Syntaxe Turtle" value="{{ponctuation::change}}" on-keydown="checkForEnter"></paper-input> <!--https://fr.wikipedia.org/wiki/Turtle_(syntaxe) -->
+    <paper-button on-tap="validForm" raised>Valider</paper-button>
+  </div>
+</template>
+
+<script>
+/**
+* `rdf-form`
+*
+*
+* @customElement
+* @polymer
+* @demo demo/index.html
+*/
+class RdfForm extends Polymer.Element {
+  static get is() { return 'rdf-form'; }
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'rdf-form'
+      },
+      sujet: {
+        type: String,
+        value: null
+      },
+      propriete: {
+        type: String,
+        value: null
+      },
+      objet: {
+        type: String,
+        value: null
+      },
+      ponctuation: {
+        //https://fr.wikipedia.org/wiki/Turtle_(syntaxe)
+        type: String,
+        value: "."
+      },
+      triplet: {
+        type: Object,
+      }
+    }
+  }
+
+  validForm(){
+    var action = "add";
+    if ((this.$.sujetInput.value == null) || (this.$.sujetInput.value.length < 1)){
+      //blank_node
+      this.$.sujetInput.value = "_:blank"+Date.now();
+    }else if ((this.$.proprieteInput.value == null) || (this.$.objetInput.value == null) || (this.$.proprieteInput.value.length < 1 ) || (this.$.objetInput.value.length < 1 )){
+      action = "search";
+    }
+    //creation du triplet avec les localnames
+    this.triplet = { sujet: {localname : this.$.sujetInput.value}, propriete: {localname :this.$.proprieteInput.value}, objet: {localname : this.$.objetInput.value} };
+    // REinit du formulaire
+    switch(this.$.ponctuationInput.value) {
+      case "?":
+      action = "search"
+      break;
+      case ",":
+      this.$.objetInput.value=null;
+      this.$.objetInput.focus();
+      break;
+      case ";":
+      this.$.proprieteInput.value=null;
+      this.$.objetInput.value=null;
+      this.$.proprieteInput.focus();
+      break;
+      case ".":
+      this.$.sujetInput.value=null;
+      this.$.proprieteInput.value=null;
+      this.$.objetInput.value=null;
+      this.$.sujetInput.focus();
+      break;
+      case "!":
+      var tempVar = this.$.sujetInput.value;
+      this.$.sujetInput.value=this.$.objetInput.value;
+      //this.$.proprieteInput.value=null;
+      this.$.objetInput.value=tempVar;
+      this.$.proprieteInput.focus();
+      break;
+      default:
+      this.$.sujetInput.value=null;
+      this.$.proprieteInput.value=null;
+      this.$.objetInput.value=null;
+      this.$.ponctuationInput.value=".";
+      this.$.sujetInput.focus();
+    }
+    console.log(action);
+    console.log(this.triplet);
+  }
+  attached(){
+    this.$.sujetInput.focus();
+  }
+  checkForEnter(e) {
+    // check if 'enter' was pressed
+    if (e.keyCode === 13) {
+      this.validForm();
+    }
+  }
+
+}
+
+window.customElements.define(RdfForm.is, RdfForm);
+</script>
+</dom-module>

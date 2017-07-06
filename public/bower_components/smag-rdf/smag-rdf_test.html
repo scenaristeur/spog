@@ -1,0 +1,49 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+
+		<script src="../webcomponentsjs/webcomponents-lite.js"></script>
+
+		<link rel="import" href="message-mixin.html">
+
+<dom-module id="smag-rdf">
+  <template>
+  <style include="shared-styles">
+      :host {
+        display: block;
+      }
+    </style>
+      <div class="card">
+    <h2>Hello [[prop1]]!</h2>
+    <p>[[message]]</p>
+    <button on-click="handleUpdateMessage">Update message</button>
+  </div>
+  </template>
+
+  <script>
+    /**
+     * `smag-rdf`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SmagRdf extends MessageMixin(Polymer.Element) {
+      static get is() { return 'smag-rdf'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'smag-rdf'
+          }
+        };
+      }
+
+      handleUpdateMessage() {
+        this.dispatch('updateMessage', 'Nothing changes by staying the same, quite literally.');
+      }
+    }
+
+    window.customElements.define(SmagRdf.is, SmagRdf);
+  </script>
+</dom-module>

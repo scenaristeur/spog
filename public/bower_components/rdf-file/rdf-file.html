@@ -1,0 +1,198 @@
+<!-- CREER UNE NOUVELLE ACTION POUR ENVOYER TS LES TRIPLETS ligne 395 -->
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../smag-rdf/message-mixin.html">
+
+<dom-module id="rdf-file">
+  <template>
+  <style include="shared-styles iron-flex">
+  :host {
+    /*display: block;*/
+  }
+  .container {
+    @apply(--layout-horizontal);
+    @apply(--layout-wrap);
+  }
+
+  .container>p {
+    /*  padding-left: 8px;*/
+    padding-right: 8px;
+    /* padding-top: 20px;*/
+    padding-left: 8px;
+  }
+  </style>
+  <div class="card">
+    <h2>[[prop1]], exporter / importer</h2>
+    <h3>Exporter</h3>
+    <p>
+      <paper-button raised on-tap="exportJson">Exporter JSON</paper-button>
+    </p>
+
+
+    <div class="container ">
+      <p><paper-button raised on-tap="exportTtl">Constituer le fichier</paper-button></p>
+      <p><paper-input id="inputFileNameToSaveAs" label="Nom du fichier a sauvegarder (.ttl)"></paper-input></p>
+      <p><paper-button raised on-tap="saveTextAsFile">Exporter le fichier Ttl</paper-button></p>
+    </div>
+    <paper-textarea id="inputTextToSave" rows="10"></paper-textarea>
+
+
+    <h3>Importer</h3>
+    <input id="filepicker" on-change="_filesChanged" type="file" multiple value="Importer"></input>
+    <div slot="file-list">
+      <h4>Fichiers</h4>
+      <!--[[nbElementsRestant]] / [[nbElementsAParser]] -->
+      <ul>
+        <template is="dom-repeat" items="{{files}}" as="file">
+          <li>
+            <strong>[[file.name]]</strong> [[file.status]]
+          </li>
+        </template>
+      </ul>
+    </div>
+  </p>
+  <!--
+  <div class="card">
+  <h1>Convertisseur XLS vers RDF </h1>
+  <a href="http://rdf-smag0.rhcloud.com/js-xls/" target="_blank">http://rdf-smag0.rhcloud.com/js-xls/</a>
+</div>
+-->
+
+
+</div>
+</template>
+
+<script>
+/**
+* `rdf-file`
+*
+*
+* @customElement
+* @polymer
+* @demo demo/index.html
+*/
+class RdfFile extends MessageMixin(Polymer.Element) {
+  static get is() { return 'rdf-file'; }
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'rdf-file'
+      },
+      nodes: {
+        type: Object,
+        statePath: 'nodes'
+      },
+      edges: {
+        type: Object,
+        statePath: 'edges'
+      },
+      /*files: {
+        type: Array,
+        value: []
+      },*/
+      triplets: {
+        type: Array,
+        value: []
+      },
+      nbElementsRestant: {
+        type: Number,
+        value: 0
+      },
+      nbElementsAParser: {
+        type: Number,
+        value: 0
+      }
+    };
+  }
+
+
+
+
+
+saveTextAsFile(){
+  var textToWrite="";
+  var fileNameToSaveAs="";
+  var textFileAsBlob="";
+  var extension="ttl";
+  var nomFichier="";
+
+  //  console.log(data);
+
+  if((typeof data != "undefined")&& (data.length>0)){
+    textToWrite=data;
+  }else{
+
+    textToWrite = this.$.inputTextToSave.value;    //textToWrite = document.getElementById("inputTextToSave").value;
+  }
+
+  if ((typeof nomFichier != "undefined") && (nomFichier.length>0)){
+    fileNameToSaveAs = nomFichier+"."+extension;
+  }else{
+    fileNameToSaveAs = this.$.inputFileNameToSaveAs.value+"."+extension; // fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value+"."+extension;
+  }
+
+
+  if ((typeof extension != "undefined") && (extension.length>0)){
+    switch(extension){
+      case "ttl" :
+      textFileAsBlob = new Blob([textToWrite], {
+        type:
+        'text/turtle'
+      }
+    );
+    break;
+    case "rdf" :
+    //pas implementé pour l'instant
+    textFileAsBlob = new Blob([textToWrite], {
+      type:
+      'application/rdf+xml'
+    }
+  );
+  break;
+  default :
+  console.log("non traite  , extension : "+extension);
+  break;
+}
+}
+
+
+console.log(nomFichier+" : "+extension);
+
+
+
+var downloadLink = document.createElement("a");
+downloadLink.download = fileNameToSaveAs;
+downloadLink.innerHTML = "Download File";
+if (window.URL != null)
+{
+  // Chrome allows the link to be clicked
+  // without actually adding it to the DOM.
+  downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+} else
+{
+  // Firefox requires the link to be added to the DOM
+  // before it can be clicked.
+  downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+  downloadLink.onclick = destroyClickedElement;
+  downloadLink.style.display = "none";
+  document.body.appendChild(downloadLink);
+}
+
+downloadLink.click();
+}
+
+
+replaceAll (string, search, replacement) {
+      return string.split(search).join(replacement);
+};
+}
+
+window.customElements.define(RdfFile.is, RdfFile);
+</script>
+</dom-module>

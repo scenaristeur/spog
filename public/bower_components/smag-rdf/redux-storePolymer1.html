@@ -1,0 +1,162 @@
+<link rel="import" href="../polymer-redux/polymer-redux.html">
+
+
+<script>
+  /* Configuration par défaut en prod
+url: "https://rdf-smag0.rhcloud.com",
+ds: "ds",
+graphe: "<http://smag0.blogspot.fr/SparqlUpdate>",
+*/
+  /* developpement et tests en local
+  url: "http://127.0.0.1:3030",
+  ds: "test",
+  graphe: "<http://smag0.blogspot.fr/SparqlUpdate>",
+  */
+
+  const initialState = {
+    lang: "fr",
+    endpointsConnus: [ // prevoir d'embarquer un serveur autonome ? http://jena.apache.org/documentation/fuseki2/fuseki-embedded.html
+      { name: "local", url: "http://127.0.0.1:3030", type: "fuseki", description: "Un serveur local installé sur votre machine. Pour installer un serveur Fuseki sur votre machine, consultez la page http://smag0.blogspot.fr/p/blog-page_14.html au point n°4.", defaultDataset: "test", urlDetail: "/$/server", score: 0 },
+      { name: "rdf-smag0", url: "https://rdf-smag0.rhcloud.com", type: "fuseki", description: "La deuxième version du servuer commun pour le projet Smag0 (http://smag0.blogspot.fr/)", defaultDataset: "ds", score: 0 },
+      { name: "fuseki-smag0", url: "https://fuseki-smag0.rhcloud.com", type: "fuseki", description: "La première version du servuer commun pour le projet Smag0 (http://smag0.blogspot.fr/)", defaultDataset: "ds", score: 0 }
+    ],
+    endpointsCourants: [],
+    url: "http://127.0.0.1:3030",
+    ds: "test",
+    graphe: "<http://smag0.blogspot.fr/SparqlUpdate>",
+    dataMaj: ["Cercle"]
+    /*  statements: [],
+    currentNode: {},
+    currentVue: {},
+    nb: 0,
+    objets: ["Chose", "Projet", "Environnement", "Acteur", "Compétence", "Organisation", "Rôle", "Action", "Evénement", "Etape", "Autre"],
+    proprietes: ["type", "label", "hasPart", "isPartOf", "subClassOf", "sameAs", "Autre"],
+    derniers: [],
+    longueurDerniers: 9,
+    vocabulaires: {"Personne" : "foaf", "Projet": "doap"},*/
+  };
+
+  // DEBUT a virer dans une autre page avec une action
+  if ((window.location.hostname != "127.0.0.1") && (window.location.hostname != "localhost")) {
+    initialState.url = "https://rdf-smag0.rhcloud.com";
+    initialState.ds = "ds";
+    initialState.graphe = "<http://smag0.blogspot.fr/SparqlUpdate>";
+  }
+  // FIN A VIRER DANS UNE AUTRE PAGE
+
+
+
+  const reducer = (state, action) => {
+    if (!state) return initialState;
+
+    switch (action.type) {
+      case 'UPDATE_LANG':
+        const lang = action.lang;
+        return Object.assign({}, state, { lang: lang });
+        break;
+      case 'MAJ':
+      console.log(action.sens);
+        switch (action.sens) {
+          case 'ADD':
+            var dataMaj = state.dataMaj.slice(0);
+            dataMaj.push(action.objet);
+            return Object.assign({}, state, { dataMaj: dataMaj })
+            break;
+          case 'SUPP':
+            var dataMaj = state.dataMaj.slice(0);
+            var filtered = dataMaj.filter(function (element) {
+              return element !== action.objet;
+            });
+            dataMaj = filtered;
+            return Object.assign({}, state, { dataMaj: dataMaj });
+            break;
+          default:
+            console.log("sens inconnu : " + action.sens);
+        }
+        break;
+      case 'MAJ_SUPP':
+        break;
+
+      /*
+      case 'ADD_STATEMENT':
+      const statements = state.statements.slice(0);
+      statements.push(action.statement);
+      return Object.assign({}, state, { statements: statements });
+      break;
+
+      case 'UPDATE_NB_MAJ':
+      var nb = action.nb;
+      return Object.assign({}, state, { nb: nb });
+      break;
+
+      case 'UPDATE_PARAMETRES':
+      var url = action.url;
+      var ds = action.ds;
+      var graphe = action.graphe;
+      return Object.assign({}, state, { url: url,ds: ds, graphe:graphe });
+      break;
+
+      case 'SET_CURRENT_NODE':
+      console.log(action);
+      //  var currentNode = state.currentNode;
+      var currentNode = action.currentNode;
+      const derniers = state.derniers.slice(0);
+      if( derniers.indexOf(action.currentNode) < 0 ){
+      derniers.unshift(action.currentNode);
+    }
+    if (derniers.length > state.longueurDerniers){
+    derniers.pop();
+  }
+  return Object.assign({},state, {currentNode: currentNode, derniers: derniers});
+  break;
+  case 'SET_CURRENT_VUE':
+  console.log(action);
+  var currentVue = action.currentVue;
+  return Object.assign({},state, {currentVue: currentVue});
+  break;
+
+  case 'SET_SERVEUR':
+  const serveur = action.serveur;
+  var url ="";
+  var ds = "";
+  var graphe = "";
+  if (serveur == "local"){
+  console.log(window.location.hostname);
+  url = "http://"+window.location.hostname+":3030";
+  ds = "test";
+  graphe = "<http://smag0.blogspot.fr/SparqlUpdate>";
+  }else if (serveur == "rdf" ) {
+  url = "https://rdf-smag0.rhcloud.com";
+  ds = "ds";
+  graphe = "<http://smag0.blogspot.fr/SparqlUpdate>";
+  }
+  else if (serveur == "fuseki" ) {
+  url = "https://fuseki-smag0.rhcloud.com";
+  ds = "ds";
+  graphe = "<http://smag0.blogspot.fr/SparqlUpdate>";
+  }
+  else if (serveur == "dbpedia" ) {
+  //http://dbpedia.org/sparql/?query=SELECT+*+WHERE+{%0D%0A%3Fs+%3Fp+%3Fo%0D%0A}%0D%0ALIMIT+100&output=json
+  url = "http://dbpedia.org/sparql";
+  //  ds = "ds";
+  //  graphe = "<http://smag0.blogspot.fr/SparqlUpdate>";
+  }
+  // console.log(url);
+  //console.log(ds);
+  //console.log(graphe);
+  return Object.assign({}, state, { url: url,ds: ds, graphe:graphe });
+  break;
+  */
+      default:
+        console.log("reducer ne connait pas cette action");
+    }
+
+  };
+
+
+  const store = Redux.createStore(reducer);
+  //const ReduxBehavior = PolymerRedux(store);
+  const ReduxMixin = PolymerRedux(store)
+  console.log(store.getState());
+
+</script>

@@ -21,9 +21,9 @@
     "paper-fab": "^2.0.0",
     "paper-dialog": "^2.0.0",
     "paper-dialog-scrollable": "^2.0.0",
-    "polymer-redux": "polymer-2",
     "vis": "^4.20.0",
-    "paper-progress": "^2.0.0"
+    "paper-progress": "^2.0.0",
+    "polymer-redux": "^1.0.1"
   },
   "resolutions": {
     "polymer": "^2.0.0-rc.3",

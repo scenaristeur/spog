@@ -1,0 +1,43 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../src/shared-styles.html">
+
+
+<dom-module id="rdf-form-help">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        padding-right: 8px;
+      }
+    </style>
+    <div class="card">
+      <h2>[[titre]], pour ajouter ou rechercher un triplet.</h2>
+      <p>Syntaxe Turtle : https://fr.wikipedia.org/wiki/Turtle_(syntaxe)</p>
+      <p>Syntaxe Turtle Etendue : un point pour un triplet complet, virgule pour garder le sujet, point-virgule pour garder sujet et propriete + ! pour inverser sujet et objet, ? pour rechercher...</p>
+    </div>
+  </template>
+
+  <script>
+    /**
+  * `rdf-form`
+  *
+  *
+  * @customElement
+  * @polymer
+  * @demo demo/index.html
+  */
+    class RdfFormHelp extends (Polymer.Element) {
+      static get is() { return 'rdf-form-help'; }
+      static get properties() {
+        return {
+          titre: {
+            type: String,
+            value: 'rdf-form'
+          },
+        }
+      }
+    }
+
+    window.customElements.define(RdfFormHelp.is, RdfFormHelp);
+  </script>
+</dom-module>
