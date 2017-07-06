@@ -1,0 +1,910 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY MaJournee "http://smag0.blogspot.fr/NS/MaJournee#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://smag0.blogspot.fr/NS/MaJournee#"
+     xml:base="http://smag0.blogspot.fr/NS/MaJournee"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:MaJournee="http://smag0.blogspot.fr/NS/MaJournee#">
+    <owl:Ontology rdf:about="http://smag0.blogspot.fr/NS/MaJournee">
+        <rdfs:comment xml:lang="fr">Ontologie de base pour décrire une journée type</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="&MaJournee;Ma_journee"/>
+        <owl:versionIRI rdf:resource="http://smag0.blogspot.fr/NS/MaJournee/1.0.0"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#alternative -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;alternative"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#composant -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;composant">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;composition"/>
+        <owl:inverseOf rdf:resource="&MaJournee;est_composant_de"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#composition -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;composition"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#environnement -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;environnement"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#environnement_Defaut -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;environnement_Defaut">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;environnement"/>
+        <owl:inverseOf rdf:resource="&MaJournee;est_environnement_Defaut_de"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#environnement_Destination -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;environnement_Destination">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;environnement"/>
+        <owl:inverseOf rdf:resource="&MaJournee;est_environnement_Destination_de"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#environnement_Origine -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;environnement_Origine">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;environnement"/>
+        <owl:inverseOf rdf:resource="&MaJournee;est_environnement_Origine_de"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#est_composant_de -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;est_composant_de">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;composition"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#est_environnement_Defaut_de -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;est_environnement_Defaut_de">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;environnement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#est_environnement_Destination_de -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;est_environnement_Destination_de">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;environnement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#est_environnement_Origine_de -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;est_environnement_Origine_de">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;environnement"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#first -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;first">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;ordre"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#next -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;next">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;ordre"/>
+        <owl:inverseOf rdf:resource="&MaJournee;precedent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#ordre -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;ordre"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#precedent -->
+
+    <owl:ObjectProperty rdf:about="&MaJournee;precedent">
+        <rdfs:subPropertyOf rdf:resource="&MaJournee;ordre"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Acteur -->
+
+    <owl:Class rdf:about="&MaJournee;Acteur"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Acteur_Materiel -->
+
+    <owl:Class rdf:about="&MaJournee;Acteur_Materiel">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Acteur"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Action -->
+
+    <owl:Class rdf:about="&MaJournee;Action"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Appartement -->
+
+    <owl:Class rdf:about="&MaJournee;Appartement">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Batiment"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Batiment -->
+
+    <owl:Class rdf:about="&MaJournee;Batiment">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Environnement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Buffet_de_cuisine -->
+
+    <owl:Class rdf:about="&MaJournee;Buffet_de_cuisine">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Meuble"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Consommable -->
+
+    <owl:Class rdf:about="&MaJournee;Consommable">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Ressource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Couteau -->
+
+    <owl:Class rdf:about="&MaJournee;Couteau">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Vaisselle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Cuisine -->
+
+    <owl:Class rdf:about="&MaJournee;Cuisine">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Piece"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Electromenager -->
+
+    <owl:Class rdf:about="&MaJournee;Electromenager">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Meuble"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Environnement -->
+
+    <owl:Class rdf:about="&MaJournee;Environnement">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Acteur"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Frigidaire -->
+
+    <owl:Class rdf:about="&MaJournee;Frigidaire">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Electromenager"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Humain -->
+
+    <owl:Class rdf:about="&MaJournee;Humain">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Acteur"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Lit -->
+
+    <owl:Class rdf:about="&MaJournee;Lit">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Meuble"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Maison -->
+
+    <owl:Class rdf:about="&MaJournee;Maison">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Batiment"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Meuble -->
+
+    <owl:Class rdf:about="&MaJournee;Meuble">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Environnement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Piece -->
+
+    <owl:Class rdf:about="&MaJournee;Piece">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Environnement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Ressource -->
+
+    <owl:Class rdf:about="&MaJournee;Ressource"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Table -->
+
+    <owl:Class rdf:about="&MaJournee;Table">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Meuble"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Tasse -->
+
+    <owl:Class rdf:about="&MaJournee;Tasse">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Vaisselle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Vaisselle -->
+
+    <owl:Class rdf:about="&MaJournee;Vaisselle">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Environnement"/>
+    </owl:Class>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#groupe_d_actions -->
+
+    <owl:Class rdf:about="&MaJournee;groupe_d_actions">
+        <rdfs:subClassOf rdf:resource="&MaJournee;Action"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#J_allume_mon_ordinateur -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;J_allume_mon_ordinateur">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_travaille_le_matin"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#J_eteins_mon_ordinateur -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;J_eteins_mon_ordinateur">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_depointe_le_soir"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#JeVaisAuBoulotAPied -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;JeVaisAuBoulotAPied"/>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_conduis -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_conduis">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_descend_de_ma_voiture"/>
+        <composant rdf:resource="&MaJournee;Ma_voiture"/>
+        <composant rdf:resource="&MaJournee;Moi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_depointe_le_midi -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_depointe_le_midi">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_mange_le_midi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_depointe_le_soir -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_depointe_le_soir">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_rentre_chez_moi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_descend_de_ma_voiture -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_descend_de_ma_voiture">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_pointe_le_matin"/>
+        <composant rdf:resource="&MaJournee;Ma_voiture"/>
+        <composant rdf:resource="&MaJournee;Moi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_dine -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_dine">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_me_couche"/>
+        <next rdf:resource="&MaJournee;Je_prepare_le_diner"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_dors -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_dors">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Mon_reveil_sonne"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_déjeune -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_déjeune">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;Je_me_sers_un_jus_de_fruits"/>
+        <composant rdf:resource="&MaJournee;Je_prepare_un_thé"/>
+        <composant rdf:resource="&MaJournee;Je_prépare_un_yahourt"/>
+        <environnement rdf:resource="&MaJournee;Ma_Cuisine"/>
+        <composant rdf:resource="&MaJournee;je_prépare_des_tartines"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_fais_chauffer_de_l_eau -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_fais_chauffer_de_l_eau">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_mets_du_the_dans_la_boule_a_the"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_fais_infuser_le_the -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_fais_infuser_le_the">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_verse_le_the_dans_une_tasse"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_mange_le_midi -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_mange_le_midi">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_pointe_le_midi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_me_couche -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_me_couche">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_dors"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_me_douche -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_me_douche">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_me_lève -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_me_lève">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;Mon_Lit"/>
+        <next rdf:resource="&MaJournee;douche_dejeune"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_me_sers_un_jus_de_fruits -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_me_sers_un_jus_de_fruits">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_mets_du_the_dans_la_boule_a_the -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_mets_du_the_dans_la_boule_a_the">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_fais_infuser_le_the"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_monte_dans_ma_voiture -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_monte_dans_ma_voiture">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <alternative rdf:resource="&MaJournee;JeVaisAuBoulotAPied"/>
+        <next rdf:resource="&MaJournee;Je_conduis"/>
+        <composant rdf:resource="&MaJournee;Ma_voiture"/>
+        <composant rdf:resource="&MaJournee;Moi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_pointe_le_matin -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_pointe_le_matin">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;J_allume_mon_ordinateur"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_pointe_le_midi -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_pointe_le_midi">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_travaille_apres_midi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_prepare_le_diner -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_prepare_le_diner">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_prepare_un_thé -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_prepare_un_thé">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <first rdf:resource="&MaJournee;Je_fais_chauffer_de_l_eau"/>
+        <composant rdf:resource="&MaJournee;Je_fais_chauffer_de_l_eau"/>
+        <composant rdf:resource="&MaJournee;Je_fais_infuser_le_the"/>
+        <composant rdf:resource="&MaJournee;Je_mets_du_the_dans_la_boule_a_the"/>
+        <composant rdf:resource="&MaJournee;Je_verse_le_the_dans_une_tasse"/>
+        <composant rdf:resource="&MaJournee;je_sors_une_tasse"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_prépare_un_yahourt -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_prépare_un_yahourt">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;Je_sors_une_cuillère"/>
+        <composant rdf:resource="&MaJournee;Ma_table"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_Frigidaire"/>
+        <composant rdf:resource="&MaJournee;Mon_Frigidaire"/>
+        <composant rdf:resource="&MaJournee;Mon_yahourt_du_jour"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_rentre_chez_moi -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_rentre_chez_moi">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;Je_conduis"/>
+        <composant rdf:resource="&MaJournee;Je_descend_de_ma_voiture"/>
+        <next rdf:resource="&MaJournee;Je_dine"/>
+        <composant rdf:resource="&MaJournee;Je_monte_dans_ma_voiture"/>
+        <environnement_Destination rdf:resource="&MaJournee;Mon_domicile"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_lieu_de_travail"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_sors_une_cuillère -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_sors_une_cuillère">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_travaille_apres_midi -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_travaille_apres_midi">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;J_eteins_mon_ordinateur"/>
+        <composant rdf:resource="&MaJournee;Mon_ordinateur_de_bureau"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_travaille_le_matin -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_travaille_le_matin">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_depointe_le_midi"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Je_verse_le_the_dans_une_tasse -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Je_verse_le_the_dans_une_tasse">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <environnement rdf:resource="&MaJournee;Ma_Tasse"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Ma_Cuisine -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Ma_Cuisine">
+        <rdf:type rdf:resource="&MaJournee;Cuisine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Ma_Tasse -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Ma_Tasse">
+        <rdf:type rdf:resource="&MaJournee;Tasse"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Ma_confiture_de_Fraises -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Ma_confiture_de_Fraises">
+        <rdf:type rdf:resource="&MaJournee;Consommable"/>
+        <environnement_Defaut rdf:resource="&MaJournee;Mon_Frigidaire"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Ma_journee -->
+
+    <owl:Thing rdf:about="&MaJournee;Ma_journee">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <first rdf:resource="&MaJournee;Mon_reveil_sonne"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Ma_table -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Ma_table">
+        <rdf:type rdf:resource="&MaJournee;Table"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Ma_voiture -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Ma_voiture">
+        <rdf:type rdf:resource="&MaJournee;Acteur_Materiel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Moi -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Moi">
+        <rdf:type rdf:resource="&MaJournee;Humain"/>
+        <environnement_Defaut rdf:resource="&MaJournee;Mon_domicile"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_Frigidaire -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_Frigidaire">
+        <rdf:type rdf:resource="&MaJournee;Environnement"/>
+        <rdf:type rdf:resource="&MaJournee;Frigidaire"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_Lit -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_Lit">
+        <rdf:type rdf:resource="&MaJournee;Lit"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_beurre -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_beurre">
+        <rdf:type rdf:resource="&MaJournee;Consommable"/>
+        <environnement_Defaut rdf:resource="&MaJournee;Mon_Frigidaire"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_buffet_de_cuisine -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_buffet_de_cuisine">
+        <rdf:type rdf:resource="&MaJournee;Buffet_de_cuisine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_domicile -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_domicile">
+        <rdf:type rdf:resource="&MaJournee;Appartement"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_lieu_de_travail -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_lieu_de_travail">
+        <rdf:type rdf:resource="&MaJournee;Batiment"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_ordinateur_de_bureau -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_ordinateur_de_bureau">
+        <rdf:type rdf:resource="&MaJournee;Acteur_Materiel"/>
+        <environnement_Defaut rdf:resource="&MaJournee;Mon_lieu_de_travail"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_pain -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_pain">
+        <rdf:type rdf:resource="&MaJournee;Consommable"/>
+        <environnement_Defaut rdf:resource="&MaJournee;Mon_buffet_de_cuisine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_pot_de_nutella -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_pot_de_nutella">
+        <rdf:type rdf:resource="&MaJournee;Consommable"/>
+        <environnement_Defaut rdf:resource="&MaJournee;Mon_buffet_de_cuisine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_reveil_sonne -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_reveil_sonne">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <next rdf:resource="&MaJournee;Je_me_lève"/>
+        <composant rdf:resource="&MaJournee;Smartphone"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Mon_yahourt_du_jour -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Mon_yahourt_du_jour">
+        <rdf:type rdf:resource="&MaJournee;Consommable"/>
+        <environnement_Defaut rdf:resource="&MaJournee;Mon_Frigidaire"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Smartphone -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Smartphone">
+        <rdf:type rdf:resource="&MaJournee;Acteur_Materiel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#Un_couteau -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;Un_couteau">
+        <rdf:type rdf:resource="&MaJournee;Couteau"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#douche_dejeune -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;douche_dejeune">
+        <rdf:type rdf:resource="&MaJournee;groupe_d_actions"/>
+        <composant rdf:resource="&MaJournee;Je_déjeune"/>
+        <composant rdf:resource="&MaJournee;Je_me_douche"/>
+        <next rdf:resource="&MaJournee;je_pars_au_boulot"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_pars_au_boulot -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_pars_au_boulot">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;Je_conduis"/>
+        <composant rdf:resource="&MaJournee;Je_descend_de_ma_voiture"/>
+        <composant rdf:resource="&MaJournee;Je_monte_dans_ma_voiture"/>
+        <first rdf:resource="&MaJournee;Je_monte_dans_ma_voiture"/>
+        <composant rdf:resource="&MaJournee;Ma_voiture"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_domicile"/>
+        <environnement_Destination rdf:resource="&MaJournee;Mon_lieu_de_travail"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_prépare_des_tartines -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_prépare_des_tartines">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;je_sors_du_pain"/>
+        <first rdf:resource="&MaJournee;je_sors_du_pain"/>
+        <composant rdf:resource="&MaJournee;je_sors_la_confiture"/>
+        <composant rdf:resource="&MaJournee;je_sors_le_beurre"/>
+        <composant rdf:resource="&MaJournee;je_sors_le_nutella"/>
+        <composant rdf:resource="&MaJournee;je_sors_un_couteau"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_sors_du_pain -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_sors_du_pain">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <environnement_Destination rdf:resource="&MaJournee;Ma_table"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_buffet_de_cuisine"/>
+        <composant rdf:resource="&MaJournee;Mon_pain"/>
+        <next rdf:resource="&MaJournee;je_sors_le_nutella"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_sors_la_confiture -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_sors_la_confiture">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;Ma_confiture_de_Fraises"/>
+        <environnement_Destination rdf:resource="&MaJournee;Ma_table"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_Frigidaire"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_sors_le_beurre -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_sors_le_beurre">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <environnement_Destination rdf:resource="&MaJournee;Ma_table"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_Frigidaire"/>
+        <composant rdf:resource="&MaJournee;Mon_beurre"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_sors_le_nutella -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_sors_le_nutella">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <environnement_Destination rdf:resource="&MaJournee;Ma_table"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_buffet_de_cuisine"/>
+        <composant rdf:resource="&MaJournee;Mon_pot_de_nutella"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_sors_un_couteau -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_sors_un_couteau">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <environnement_Destination rdf:resource="&MaJournee;Ma_table"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_buffet_de_cuisine"/>
+        <composant rdf:resource="&MaJournee;Un_couteau"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://smag0.blogspot.fr/NS/MaJournee#je_sors_une_tasse -->
+
+    <owl:NamedIndividual rdf:about="&MaJournee;je_sors_une_tasse">
+        <rdf:type rdf:resource="&MaJournee;Action"/>
+        <composant rdf:resource="&MaJournee;Ma_Tasse"/>
+        <environnement_Destination rdf:resource="&MaJournee;Ma_table"/>
+        <environnement_Origine rdf:resource="&MaJournee;Mon_buffet_de_cuisine"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

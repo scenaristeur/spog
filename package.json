@@ -1,0 +1,16 @@
+{
+  "name": "spog",
+  "version": "1.0.0",
+  "description": "- Prerequis L'appli \"Smag0\" nécessite l'accès à un serveur de données ouvertes. Nous allons utiliser \"Apache Fuseki\" comme serveur aussi appelé endpoint. Nous aurons besoin d'un dataset, un espace pour stocker nos données. Nous pourrons ensuite découper ce dataset en graphes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "redux": "^3.6.0",
+    "socket.io": "^2.0.1"
+  }
+}

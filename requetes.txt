@@ -1,0 +1,17 @@
+- lister les graphes d'un dataset :
+
+SELECT ?g
+WHERE {
+  GRAPH ?g { }
+}
+ou (virtuoso ? )
+SELECT DISTINCT ?g {
+    GRAPH ?g { ?s ?p ?o . }
+}
+
+SELECT * FROM <http://smag0.blogspot.fr/SparqlUpdate> WHERE {?Sujet ?Predicat ?Objet}
+
+http://www.ibm.com/developerworks/xml/library/j-sparql/
+
+
+<!-- hidden pour les IF et pour FLEX https://codingwithgerwin.blogspot.fr/2016/04/polymer-and-hidden-attribute.html -->

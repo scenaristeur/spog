@@ -1,0 +1,18 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/rdf-vis/rdf-vis.html">
+<link rel="import" href="../bower_components/rdf-form/rdf-form-help.html">
+<link rel="import" href="../bower_components/rdf-vis/rdf-vis-help.html">
+<dom-module id="my-help">
+  <template>
+    <!--<rdf-vis></rdf-vis>-->
+    <rdf-form-help></rdf-form-help>
+    <rdf-vis-help></rdf-vis-help>
+  </template>
+
+  <script>
+    class MyHelp extends Polymer.Element {
+      static get is() { return 'my-help'; }
+    }
+    window.customElements.define(MyHelp.is, MyHelp);
+  </script>
+</dom-module>
