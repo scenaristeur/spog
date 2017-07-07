@@ -30,7 +30,7 @@ git clone https://github.com/scenaristeur/spog.git && cd spog && npm install && 
 ```
 
 l'appli devrait se lancer et être accessible à l'adresse "http://127.0.0.1:3000"
-Pour avoir un aperçu du bouzin, on peut aussi importer le graphe du projet SpogYun dans /data/spogYun.json
+Pour avoir un aperçu du bouzin, on peut aussi importer le graphe du projet SpogYun dans /data/spogYun.json ou appartementDavid.ttl
 
 ![spog rdf import](https://raw.githubusercontent.com/scenaristeur/spog/master/data/spog-rdf-import.png)
 

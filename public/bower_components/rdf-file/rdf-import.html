@@ -152,7 +152,7 @@ class RdfImport extends MessageMixin(Polymer.Element) {
       this.nbElementsRestant = this.nbElementsAParser - i;
       console.log(this.nbElementsRestant);
         this.$.elementsRestant.innerHTML = this.nbElementsRestant;
-        setTimeout(function(){ console.log("Hello"); }, 300);
+       /* setTimeout(function(){ console.log("Hello"); }, 300);*/
       var ligne = lignes[i];
       //  console.log("--> "+ligne);
       if (ligne.startsWith("@prefix ")) {
